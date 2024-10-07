@@ -10,7 +10,7 @@
 
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.min.css' %}" media="screen">
-        
+
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -49,8 +49,9 @@
                             <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
                         </header>
                         <!-- Preview image figure-->
-                        <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
+                        <figure class="mb-4"><img class="img-fluid rounded" src="{{ post.head_image.url }}" alt="" /></figure>
                         <!-- Post content-->
+                        <hr/>
                         <section class="mb-5">
                             <p class="fs-5 mb-4">{{ post.content }}</p>
                         </section>
