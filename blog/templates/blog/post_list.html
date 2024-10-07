@@ -1,6 +1,16 @@
 {% extends 'blog/base.html' %}
 
 {% block main_area %}
+
+                {% if user.is_authenticated %}
+                    {% if user.is_superuser or user.is_staff %}
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a class="btn btn-secondary" href="/blog/create_post/" type="button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;New Post</a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+
                 <h1>Blog
                     {% if category %}<span class="badge rounded-pill text-bg-secondary">{{ category }}</span>{% endif %}</h1>
 
@@ -42,7 +52,7 @@
                             <br/>
                           {% endif %}
 
-                          <a class="btn btn-primary" href="{{ p.get_absolute_url }}">Read more →</a>
+                          <a class="btn btn-secondary" href="{{ p.get_absolute_url }}">Read more →</a>
                       </div>
                     </div>
                     {% endfor %}
