@@ -7,6 +7,11 @@
 {% block main_area %}
 
                 <div id="post-area">
+                    {% if post.category %}
+                        <span class="badge rounded-pill text-bg-secondary">{{ post.category }}</span>
+                    {% else %}
+                        <span class="badge rounded-pill text-bg-secondary">None</span>
+                    {% endif %}
                     <!-- Post content-->
                     <article>
                         <!-- Post header-->
