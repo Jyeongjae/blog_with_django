@@ -1,4 +1,5 @@
 {% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block head_title %}
 {{ post.title }} - Blog
@@ -77,13 +78,24 @@
                 <div id="comment-area">
                     <!-- Comments section-->
                     <section class="mb-5">
-                        <div class="card bg-light">
+                        <!-- Commnet form -->
+                        <div class="card my-4">
+                            <h5 class="card-header">Leave a Comment:</h5>
                             <div class="card-body">
-                                <!-- Comment form-->
-                                <form class="mb-4">
-                                    <textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
-                                    <button type="submit" class="btn btn-secondary float-right">Submit</button>
+                                {% if user.is_authenticated %}
+                                <form id="comment-form" method="POST" action="{{ post.get_absolute_url }}new_comment/">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        {{ comment_form | crispy }}
+                                    </div>
+                                    <button type="submit" class="btn btn-secondary">Submit</button>
                                 </form>
+                                {% else %}
+                                    <div class="d-grid col-12 mx-auto">
+                                        <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="#" data-toggle="modal" data-target="#loginModal">Log in and Leave a comment</a>
+                                    </div>
+                                {% endif %}
+                                <hr/>
 
                                 {% if post.comment_set.exists %}
                                     {% for comment in post.comment_set.iterator %}
